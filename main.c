@@ -6,7 +6,7 @@
 /*   By: tseguier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/09/27 15:31:41 by tseguier          #+#    #+#             */
-/*   Updated: 2014/09/27 18:33:09 by tseguier         ###   ########.fr       */
+/*   Updated: 2014/09/27 18:45:16 by tseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int		main(void)
 
 	dstr = ft_dynstrnew(64);
 	i = 0;
-	while (i < 300000)
+	while (i < 100000000)
 	{
 		tmp = ft_itoa(rand());
 		ft_dynstradd(dstr, tmp);
