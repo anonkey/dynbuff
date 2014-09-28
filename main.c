@@ -57,7 +57,11 @@ int		ft_dynstr_extend(t_dynstr dstr, unsigned long size)
 	if (!(buffer = ft_strnew(size + dstr->inc)))
 		return (-1);
 	if (-1 == ft_ldcdpush_back(dstr->bufflist, buffer, size + dstr->inc))
+	{
+		free(buffer);
 		return (-1);
+	}
+		free(buffer);
 	dstr->offset = 0;
 	return (0);
 }
@@ -68,7 +72,7 @@ int		ft_dynstradd(t_dynstr dstr, char *str)
 	unsigned long	freebytes;
 
 	size = ft_strlen(str);
-	if (!(ft_ldcdsize(dstr->bufflist)) || dstr->bufflist->tail->content_size - dstr->offset < size)
+	if (!(ft_ldcdsize(dstr->bufflist)) || dstr->bufflist->tail->content_size - dstr->offset - 1 < size)
 	{
 		if (dstr->bufflist->tail)
 		{
@@ -132,17 +136,21 @@ int		main(void)
 
 	dstr = ft_dynstrnew(64);
 	i = 0;
-	while (i < 100000000)
+	while (i < 1000000)
 	{
+	    ft_putnbr(dstr->size);
+	    ft_putchar('\n');
 		tmp = ft_itoa(rand());
 		ft_dynstradd(dstr, tmp);
 		ft_dynstradd(dstr, "||--||");
 		free(tmp);
 		++i;
 	}
+	ft_putendl("END");
 	ft_dynstrput(dstr);
 	tmp = ft_dynstrflush(dstr);
 	ft_putendl(tmp);
+	ft_strdel(&tmp);
 	ft_dynstrdel(&dstr);
 	return (0);
 }
